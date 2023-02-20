@@ -1,61 +1,35 @@
-# Python program for implementation of Quicksort Sort
+# function to partition the input list and return the index of the pivot element
+def partition(dataList, low, high):
+    # set the pivot element to the last element in the list
+    pivot = dataList[high]
 
-# This implementation utilizes pivot as the last element in the nums list
-# It has a pointer to keep track of the elements smaller than the pivot
-# At the very end of partition() function, the pointer is swapped with the pivot
-# to come up with a "sorted" nums relative to the pivot
-
-
-# Function to find the partition position
-def partition(array, low, high):
-    # choose the rightmost element as pivot
-    pivot = array[high]
-
-    # pointer for greater element
+    # set the starting index for elements that are greater than the pivot
     i = low - 1
 
-    # traverse through all elements
-    # compare each element with pivot
+    # loop through the list from low to high
     for j in range(low, high):
-        if array[j] <= pivot:
-            # If element smaller than pivot is found
-            # swap it with the greater element pointed by i
+        # if the current element is less than or equal to the pivot
+        if dataList[j] <= pivot:
+            # move the element to the left side of the pivot
             i = i + 1
+            (dataList[i], dataList[j]) = (dataList[j], dataList[i])
 
-            # Swapping element at i with element at j
-            (array[i], array[j]) = (array[j], array[i])
+    # move the pivot to its correct position
+    (dataList[i + 1], dataList[high]) = (dataList[high], dataList[i + 1])
 
-    # Swap the pivot element with the greater element specified by i
-    (array[i + 1], array[high]) = (array[high], array[i + 1])
-
-    # Return the position from where partition is done
+    # return the index of the pivot element
     return i + 1
 
 
-# function to perform quicksort
-
-
-def quickSort(array, low, high):
+# function to implement quicksort algorithm
+def quickSort(dataList, low, high):
+    # if there are more than one element in the list
     if low < high:
-        # Find pivot element such that
-        # element smaller than pivot are on the left
-        # element greater than pivot are on the right
-        pi = partition(array, low, high)
+        # partition the list and get the index of the pivot
+        pi = partition(dataList, low, high)
 
-        # Recursive call on the left of pivot
-        quickSort(array, low, pi - 1)
+        # recursively call quicksort on the left side of the pivot
+        quickSort(dataList, low, pi - 1)
 
-        # Recursive call on the right of pivot
-        quickSort(array, pi + 1, high)
-
-
-data = [1, 7, 4, 1, 10, 9, -2]
-print("Unsorted Array")
-print(data)
-
-size = len(data)
-
-quickSort(data, 0, size - 1)
-
-print('Sorted Array in Ascending Order:')
-print(data)
+        # recursively call quicksort on the right side of the pivot
+        quickSort(dataList, pi + 1, high)

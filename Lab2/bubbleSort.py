@@ -1,26 +1,10 @@
-# Python3 program for Bubble Sort Algorithm Implementation
-def bubbleSort(arr):
-    n = len(arr)
+def bubbleSort(dataList):
+    n = len(dataList)    # get the length of the input array
 
-    # For loop to traverse through all
-    # element in an array
-    for i in range(n):
-        for j in range(0, n - i - 1):
+    for i in range(n):    # outer loop to run n times
+        for j in range(0, n - i - 1):    # inner loop to compare adjacent elements
 
-            # Range of the array is from 0 to n-i-1
-            # Swap the elements if the element found
-            # is greater than the adjacent element
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-
-
-# Driver code
-
-# Example to test the above code
-arr = [2, 1, 10, 23]
-
-bubbleSort(arr)
-
-print("Sorted array is:")
-for i in range(len(arr)):
-    print("%d" % arr[i])
+            # check if the current element is greater than the next element
+            if dataList[j] > dataList[j + 1]:
+                # if yes, swap the elements using tuple assignment
+                dataList[j], dataList[j + 1] = dataList[j + 1], dataList[j]

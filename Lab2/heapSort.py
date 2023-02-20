@@ -1,63 +1,36 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# Python program for implementation of heap Sort
+# Heapify function to maintain the heap property of the given list
+def heapify(dataList, low, high):
+    largest = high
+    left = 2 * high + 1    # calculate the index of the left child
+    right = 2 * high + 2    # calculate the index of the right child
 
-# To heapify subtree rooted at index i.
-# n is size of heap
+    # Check if the left child is larger than the highest index element
+    # If so, update the largest index to the index of the left child
+    if left < high and dataList[high] < dataList[left]:
+        largest = left
 
+    # Check if the right child is larger than the element at the largest index
+    # If so, update the largest index to the index of the right child
+    if right < high and dataList[largest] < dataList[right]:
+        largest = right
 
-def heapify(arr, n, i):
-    largest = i  # Initialize largest as root
-    l = 2 * i + 1  # left = 2*i + 1
-    r = 2 * i + 2  # right = 2*i + 2
-
-    # See if left child of root exists and is
-    # greater than root
-
-    if l < n and arr[i] < arr[l]:
-        largest = l
-
-    # See if right child of root exists and is
-    # greater than root
-
-    if r < n and arr[largest] < arr[r]:
-        largest = r
-
-    # Change root, if needed
-
-    if largest != i:
-        (arr[i], arr[largest]) = (arr[largest], arr[i])  # swap
-
-        # Heapify the root.
-
-        heapify(arr, n, largest)
+    # If the largest index is not the same as the highest index, swap the elements
+    # at those indices and call heapify recursively on the new largest index
+    if largest != high:
+        (dataList[high], dataList[largest]) = (dataList[largest], dataList[high])
+        heapify(dataList, low, largest)
 
 
-# The main function to sort an array of given size
+# Heap sort function to sort the given list of data
+def heapSort(dataList):
+    n = len(dataList)
 
-def heapSort(arr):
-    n = len(arr)
-
-    # Build a maxheap.
-    # Since last parent will be at ((n//2)-1) we can start at that location.
-
+    # Build a max heap by calling heapify on the bottom half of the list
     for i in range(n // 2 - 1, -1, -1):
-        heapify(arr, n, i)
+        heapify(dataList, n, i)
 
-    # One by one extract elements
-
+    # Sort the list by repeatedly swapping the first element with the last element
+    # and calling heapify to restore the heap property
     for i in range(n - 1, 0, -1):
-        (arr[i], arr[0]) = (arr[0], arr[i])  # swap
-        heapify(arr, i, 0)
-
-
-# Driver code to test above
-
-arr = [12, 11, 13, 5, 6, 7, ]
-heapSort(arr)
-n = len(arr)
-print('Sorted array is')
-for i in range(n):
-    print(arr[i])
-
-# This code is contributed by Mohit Kumra
+        (dataList[i], dataList[0]) = (dataList[0], dataList[i])
+        heapify(dataList, i, 0)
