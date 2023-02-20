@@ -57,8 +57,8 @@ data = [907, 380, -563, -879, 512, 854, 17, -374, 353, -602, -227, -227, -859, 6
 def sort(n_elements, exec_times, sortType):
     for i in range(1, len(data) + 1):
         start_time = time.perf_counter()
-        s1 = Sort(data[:i], 0, i - 1)
-        s2 = Sort(data, 0, i - 1)
+        s1 = Sort(data[:i], 0, i)
+        s2 = Sort(data, 0, i)
         match sortType:
             case "quickSort":
                 s1.quickSort()
