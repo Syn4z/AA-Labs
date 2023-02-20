@@ -58,6 +58,7 @@ def sort(n_elements, exec_times, sortType):
     for i in range(1, len(data) + 1):
         start_time = time.perf_counter()
         s1 = Sort(data[:i], 0, i - 1)
+        s2 = Sort(data, 0, i - 1)
         match sortType:
             case "quickSort":
                 s1.quickSort()
@@ -67,6 +68,8 @@ def sort(n_elements, exec_times, sortType):
                 s1.heapSort()
             case "bubbleSort":
                 s1.bubbleSort()
+            case "show":
+                s2.quickSort()
         end_time = time.perf_counter()
 
         # Append number of elements and execution time to their respective lists
