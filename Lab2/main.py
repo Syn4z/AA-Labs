@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from sorting import sort, data
+from sorting import sort
 
 if __name__ == "__main__":
 
@@ -33,29 +33,17 @@ if __name__ == "__main__":
     # Plot on the graph
     plt.plot(n_elements, exec_times, linewidth=3, label='heapSort')
 
-    # Show the graph
-    plt.xlabel("Number of elements")
-    plt.ylabel("Time, s")
-    plt.title("Sorting algorithms Execution Time")
-    plt.legend()
-    plt.show()
-
-    n_elements = []
-    exec_times = []
-    sort(n_elements, exec_times, "show")
-    print("Sorted list: ", data)
-
     # Reset the lists
     n_elements = []
     exec_times = []
 
     # Sort the array with bubbleSort and record the execution time
-    sort(n_elements, exec_times, "bubbleSort")
+    sort(n_elements, exec_times, "bucketSort")
 
     # Plot the graph
-    plt.plot(n_elements, exec_times, color='red', linewidth=3, label='bubbleSort')
+    plt.plot(n_elements, exec_times, linewidth=3, label='bubbleSort')
     plt.xlabel("Number of elements")
     plt.ylabel("Time, s")
-    plt.title("Bubble Sort Execution Time")
+    plt.title("Sorting algorithms Execution Time")
     plt.legend()
     plt.show()

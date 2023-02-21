@@ -1,7 +1,7 @@
 from quickSort import quickSort
 from mergeSort import mergeSort
 from heapSort import heapSort
-from bubbleSort import bubbleSort
+from bucketSort import bucketSort
 
 
 class Sort:
@@ -20,5 +20,5 @@ class Sort:
     def heapSort(self):
         return heapSort(self.data)
 
-    def bubbleSort(self):
-        return bubbleSort(self.data)
+    def bucketSort(self):
+        return bucketSort(self.data)
