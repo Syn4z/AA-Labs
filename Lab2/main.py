@@ -9,6 +9,7 @@ if __name__ == "__main__":
 
     # Sort the array with quickSort and record the execution time
     sort(n_elements, exec_times, "quickSort")
+    print("quickSort times: ", exec_times)
 
     # Plot on the graph
     plt.plot(n_elements, exec_times, linewidth=3, label='quickSort')
@@ -19,6 +20,7 @@ if __name__ == "__main__":
 
     # Sort the array with mergeSort and record the execution time
     sort(n_elements, exec_times, "mergeSort")
+    print("mergeSort times: ", exec_times)
 
     # Plot on the graph
     plt.plot(n_elements, exec_times, linewidth=3, label='mergeSort')
@@ -29,6 +31,7 @@ if __name__ == "__main__":
 
     # Sort the array with heapSort and record the execution time
     sort(n_elements, exec_times, "heapSort")
+    print("heapSort times: ", exec_times)
 
     # Plot on the graph
     plt.plot(n_elements, exec_times, linewidth=3, label='heapSort')
@@ -37,11 +40,12 @@ if __name__ == "__main__":
     n_elements = []
     exec_times = []
 
-    # Sort the array with bubbleSort and record the execution time
+    # Sort the array with bucketSort and record the execution time
     sort(n_elements, exec_times, "bucketSort")
+    print("bucketSort times: ", exec_times)
 
     # Plot the graph
-    plt.plot(n_elements, exec_times, linewidth=3, label='bubbleSort')
+    plt.plot(n_elements, exec_times, linewidth=3, label='bucketSort')
     plt.xlabel("Number of elements")
     plt.ylabel("Time, s")
     plt.title("Sorting algorithms Execution Time")
