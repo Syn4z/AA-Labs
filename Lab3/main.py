@@ -8,23 +8,60 @@ from alg5 import alg5
 
 if __name__ == "__main__":
 
-    times = []
+    times = [[0] * 10 for x in range(5)]
     algorithms = [alg1, alg2, alg3, alg4, alg5]
 
-    for n in range(1000, 5000, 1000):
-        for el in algorithms:
+    for n in range(1000, 11000, 1000):
+        for i in range(len(algorithms)):
             start_time = time.perf_counter()
-            res = el(n)
+            res = algorithms[i](n)
             end_time = time.perf_counter()
             timeRes = (end_time - start_time)
-            times.append(timeRes)
+            x = int(n/1000-1)
+            times[i][x] = timeRes
 
-            print(el.__name__ + ":\n", res, "\n", timeRes)
-
-    print(times)
-
-    plt.plot(range(1000, 10000, 1000), times)
-    plt.xlabel('n')
+    plt.plot(range(1000, 11000, 1000), times[0], linewidth=3, label='alg1')
+    plt.xlabel('nr of elements')
     plt.ylabel('Time (s)')
-    plt.title('Execution time for alg5')
+    plt.title('Algorithm 1')
+    plt.legend()
+    plt.show()
+
+    plt.plot(range(1000, 11000, 1000), times[1], 'y', linewidth=3, label='alg2')
+    plt.xlabel('nr of elements')
+    plt.ylabel('Time (s)')
+    plt.title('Algorithm 2')
+    plt.legend()
+    plt.show()
+
+    plt.plot(range(1000, 11000, 1000), times[2], 'g', linewidth=3, label='alg3')
+    plt.xlabel('nr of elements')
+    plt.ylabel('Time (s)')
+    plt.title('Algorithm 3')
+    plt.legend()
+    plt.show()
+
+    plt.plot(range(1000, 11000, 1000), times[3], 'r', linewidth=3, label='alg4')
+    plt.xlabel('nr of elements')
+    plt.ylabel('Time (s)')
+    plt.title('Algorithm 4')
+    plt.legend()
+    plt.show()
+
+    plt.plot(range(1000, 11000, 1000), times[4], 'm', linewidth=3, label='alg5')
+    plt.xlabel('nr of elements')
+    plt.ylabel('Time (s)')
+    plt.title('Algorithm 5')
+    plt.legend()
+    plt.show()
+
+    plt.plot(range(1000, 11000, 1000), times[0], linewidth=3, label='alg1')
+    plt.plot(range(1000, 11000, 1000), times[1], 'y', linewidth=3, label='alg2')
+    plt.plot(range(1000, 11000, 1000), times[2], 'g', linewidth=3, label='alg3')
+    plt.plot(range(1000, 11000, 1000), times[3], 'r', linewidth=3, label='alg4')
+    plt.plot(range(1000, 11000, 1000), times[4], 'm', linewidth=3, label='alg5')
+    plt.xlabel('nr of elements')
+    plt.ylabel('Time (s)')
+    plt.title('Execution time for all Algorithms')
+    plt.legend()
     plt.show()
