@@ -1,5 +1,6 @@
 import time
 import matplotlib.pyplot as plt
+from prettytable import PrettyTable
 from alg1 import alg1
 from alg2 import alg2
 from alg3 import alg3
@@ -16,7 +17,7 @@ if __name__ == "__main__":
             start_time = time.perf_counter()
             res = algorithms[i](n)
             end_time = time.perf_counter()
-            timeRes = (end_time - start_time)
+            timeRes = round((end_time - start_time), 4)
             x = int(n/1000-1)
             times[i][x] = timeRes
 
@@ -65,3 +66,11 @@ if __name__ == "__main__":
     plt.title('Execution time for all Algorithms')
     plt.legend()
     plt.show()
+
+    myTable = PrettyTable(['Nr of elements', *(range(1000, 11000, 1000))])
+    myTable.add_row(["Algorithm 1", *times[0]])
+    myTable.add_row(["Algorithm 2", *times[1]])
+    myTable.add_row(["Algorithm 3", *times[2]])
+    myTable.add_row(["Algorithm 4", *times[3]])
+    myTable.add_row(["Algorithm 5", *times[4]])
+    print(myTable)
