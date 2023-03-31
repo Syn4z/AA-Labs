@@ -6,6 +6,7 @@ class Node:
         self.value = value
         self.children = children if children is not None else []
 
+    # Define the string representation of the node
     def __repr__(self):
         return f"Node({self.value})"
 
@@ -48,6 +49,7 @@ def unbalancedTree():
             ]),
         ]),
     ])
+
     return root
 
 
@@ -81,6 +83,7 @@ def balancedTree():
             ])
         ])
     ])
+
     return root
 
 
@@ -120,6 +123,7 @@ def dfs(node, target, visited=None, path=None):
     return None
 
 
+# Function to output the tree graphically
 def draw_tree(root, treeType):
     graphName = ''
 
@@ -137,4 +141,5 @@ def draw_tree(root, treeType):
     graph = graphviz.Digraph(directory="C:/Users/Admin/git_repository/AA-Labs/Lab4/graphs", name=graphName)
     add_node(root, graph)
     graph.render(view=True)
+
     return graph

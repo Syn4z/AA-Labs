@@ -6,6 +6,7 @@ from prettytable import PrettyTable
 from Tree import unbalancedTree, balancedTree, bfs, dfs, draw_tree
 
 
+# Time results function
 def timeRes(timeResNodes):
     timeResBfsFinal = [timeResNodes[0], (timeResNodes[0] + timeResNodes[1]) / 2,
                        (timeResNodes[0] + timeResNodes[1] + timeResNodes[2]) / 3,
@@ -15,10 +16,12 @@ def timeRes(timeResNodes):
     return timeResBfsFinal
 
 
+# Loop function to plot the graphs for both trees
 def loop(nodeList, timeResBfsFinal, timeResDfsFinal):
     timeResBfs = []
     timeResDfs = []
 
+    # BFS
     for i in range(len(nodeList)):
         for n in nodeList[i]:
             print("Node to find: ", n)
@@ -30,8 +33,9 @@ def loop(nodeList, timeResBfsFinal, timeResDfsFinal):
             timeResBfs.append(endTime - startTime)
     timeResBfsFinal += timeRes(timeResBfs)
 
-    plt.bar(X_axis - 0.2, timeResBfsFinal, 0.4, label='BFS')
+    plt.bar(X_axis - 0.2, timeResBfsFinal, 0.4, label='BFS', color='orange')
 
+    # DFS
     for i in range(len(nodeList)):
         for n in nodeList[i]:
             print("Node to find: ", n)
@@ -43,21 +47,24 @@ def loop(nodeList, timeResBfsFinal, timeResDfsFinal):
             timeResDfs.append(endTime - startTime)
     timeResDfsFinal += timeRes(timeResDfs)
 
-    plt.bar(X_axis + 0.2, timeResDfsFinal, 0.4, label='DFS')
+    plt.bar(X_axis + 0.2, timeResDfsFinal, 0.4, label='DFS', color='green')
 
+    # Plot the graph
     plt.xticks(X_axis, X)
-    plt.xlabel('searched nodes')
+    plt.xlabel('Nr of searched nodes')
     plt.ylabel('Time (s)')
     if nodeList == nodeListUnb:
-        plt.title('Execution time for unbalanced tree with 20 nodes')
+        plt.title('Unbalanced tree with 20 nodes')
     else:
-        plt.title('Execution time for balanced tree with 20 nodes')
+        plt.title('Balanced tree with 20 nodes')
     plt.legend()
+    plt.grid(True)
     plt.show()
 
     return timeResBfsFinal, timeResDfsFinal
 
 
+# Generate random nodes function
 def node(treeType):
     if treeType == 'b':
         return random.randint(1, 14)
@@ -66,6 +73,8 @@ def node(treeType):
 
 
 if __name__ == "__main__":
+
+    # Create random nodes for search
     nodeListB = [[node('b')], [node('b'), node('b')], [node('b'), node('b'), node('b')],
                  [node('b'), node('b'), node('b'), node('b')],
                  [node('b'), node('b'), node('b'), node('b'), node('b')]]
@@ -73,6 +82,7 @@ if __name__ == "__main__":
                    [node('u'), node('u'), node('u'), node('u')],
                    [node('u'), node('u'), node('u'), node('u'), node('u')]]
 
+    # Draw trees
     root = unbalancedTree()
     graph = draw_tree(root, 'u')
     graph.render()
@@ -81,19 +91,30 @@ if __name__ == "__main__":
     graph = draw_tree(balanced_root, 'b')
     graph.render()
 
+    # X axis
     X = ['1', '2', '3', '4', '5']
     X_axis = np.arange(len(X))
+    # Time results
     timeBFSBal = []
     timeBFSUnb = []
     timeDFSBal = []
     timeDFSUnb = []
 
+    # Balanced tree
     loop(nodeListB, timeBFSBal, timeDFSBal)
+    # Unbalanced tree
     loop(nodeListUnb, timeBFSUnb, timeDFSUnb)
 
+    # Draw table
     myTable = PrettyTable(['Nr of Nodes searched', *X])
     myTable.add_row(["Balanced BFS", *timeBFSBal])
     myTable.add_row(["Balanced DFS", *timeDFSBal])
     myTable.add_row(["Unbalanced BFS", *timeBFSUnb])
     myTable.add_row(["Unbalanced DFS", *timeDFSUnb])
     print(myTable)
+
+    # Separate time results
+    print(myTable[0])
+    print(myTable[1])
+    print(myTable[2])
+    print(myTable[3])
