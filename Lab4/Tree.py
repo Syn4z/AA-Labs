@@ -14,16 +14,37 @@ def unbalancedTree():
     # Define the unbalanced tree structure
     root = Node(1, [
         Node(2, [
-            Node(4),
+            Node(4, [
+                Node(14, [
+                ]),
+            ]),
             Node(5, [
                 Node(10, [
-                    Node(11)
+                    Node(11, [
+                        Node(17),
+                    ]),
+                    Node(8, [
+                        Node(9, [
+                            Node(16, [
+                                Node(18, [
+                                    Node(20),
+                                ]),
+                            ])
+                        ])
+                    ]),
+                ]),
+                Node(7, [
+                    Node(12, [
+                        Node(13, [
+                            Node(15),
+                        ]),
+                    ]),
                 ]),
             ])
         ]),
         Node(3, [
             Node(6, [
-                Node(12)
+                Node(19),
             ]),
         ]),
     ])
@@ -48,8 +69,15 @@ def balancedTree():
                 Node(13)
             ]),
             Node(7, [
-                Node(8),
-                Node(9)
+                Node(8, [
+                    Node(15),
+                    Node(16)
+                ]),
+                Node(9, [
+                    Node(17),
+                    Node(18),
+                    Node(19)
+                ])
             ])
         ])
     ])
@@ -92,21 +120,21 @@ def dfs(node, target, visited=None, path=None):
     return None
 
 
-def draw_tree(root):
+def draw_tree(root, treeType):
+    graphName = ''
+
     def add_node(node, tree):
         tree.node(str(id(node)), label=str(node.value))
         for child in node.children:
             tree.edge(str(id(node)), str(id(child)))
             add_node(child, tree)
 
-    if root == 'unbalancedTree':
-        fileName = 'unbalancedTree'
+    if treeType == 'u':
         graphName = 'Unbalanced Tree'
-    else:
-        fileName = 'balancedTree'
+    elif treeType == 'b':
         graphName = 'Balanced Tree'
 
     graph = graphviz.Digraph(directory="C:/Users/Admin/git_repository/AA-Labs/Lab4/graphs", name=graphName)
     add_node(root, graph)
-    graph.render(filename=fileName, view=True)
+    graph.render(view=True)
     return graph
