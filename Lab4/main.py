@@ -17,37 +17,60 @@ def timeRes(timeResNodes):
 
 
 # Loop function to plot the graphs for both trees
-def loop(nodeList, timeResBfsFinal, timeResDfsFinal):
+def loop(nodeList, timeResBfsFinal, timeResDfsFinal, searchType):
     timeResBfs = []
     timeResDfs = []
 
-    # BFS
-    for i in range(len(nodeList)):
-        for n in nodeList[i]:
-            print("Node to find: ", n)
-            print("Group of", len(nodeList[i]), "nodes")
-            startTime = time.perf_counter()
-            bfs_result_bal = bfs(balanced_root, n)
-            endTime = time.perf_counter()
-            print("Path:\n", bfs_result_bal)
-            timeResBfs.append(endTime - startTime)
-    timeResBfsFinal += timeRes(timeResBfs)
+    if searchType == 'bfs' or searchType == 'both':
+        # BFS
+        for i in range(len(nodeList)):
+            for n in nodeList[i]:
+                ''' # Uncomment to see the results
+                print("Node to find: ", n)
+                print("Group of", len(nodeList[i]), "nodes")
+                '''
+                startTime = time.perf_counter()
+                bfs_result_bal = bfs(balanced_root, n)
+                endTime = time.perf_counter()
+                ''' print("Path:\n", bfs_result_bal) '''
+                timeResBfs.append(endTime - startTime)
+        timeResBfsFinal += timeRes(timeResBfs)
 
-    plt.bar(X_axis - 0.2, timeResBfsFinal, 0.4, label='BFS', color='orange')
+        plt.bar(X_axis - 0.2, timeResBfsFinal, 0.4, label='BFS', color='orange')
 
-    # DFS
-    for i in range(len(nodeList)):
-        for n in nodeList[i]:
-            print("Node to find: ", n)
-            print("Group of", len(nodeList[i]), "nodes")
-            startTime = time.perf_counter()
-            dfs_result_bal = dfs(balanced_root, n)
-            endTime = time.perf_counter()
-            print("Path:\n", dfs_result_bal)
-            timeResDfs.append(endTime - startTime)
-    timeResDfsFinal += timeRes(timeResDfs)
+        if searchType == 'both':
+            # DFS
+            for i in range(len(nodeList)):
+                for n in nodeList[i]:
+                    ''' # Uncomment to see the results
+                    print("Node to find: ", n)
+                    print("Group of", len(nodeList[i]), "nodes")
+                    '''
+                    startTime = time.perf_counter()
+                    dfs_result_bal = dfs(balanced_root, n)
+                    endTime = time.perf_counter()
+                    ''' print("Path:\n", dfs_result_bal) '''
+                    timeResDfs.append(endTime - startTime)
+            timeResDfsFinal += timeRes(timeResDfs)
 
-    plt.bar(X_axis + 0.2, timeResDfsFinal, 0.4, label='DFS', color='green')
+            plt.bar(X_axis + 0.2, timeResDfsFinal, 0.4, label='DFS', color='green')
+
+    elif searchType == 'dfs':
+        # DFS
+        for i in range(len(nodeList)):
+            for n in nodeList[i]:
+                ''' # Uncomment to see the results
+                print("Node to find: ", n)
+                print("Group of", len(nodeList[i]), "nodes")
+                '''
+                startTime = time.perf_counter()
+                dfs_result_bal = dfs(balanced_root, n)
+                endTime = time.perf_counter()
+                ''' print("Path:\n", dfs_result_bal) '''
+                timeResDfs.append(endTime - startTime)
+        timeResDfsFinal += timeRes(timeResDfs)
+
+        plt.bar(X_axis + 0.2, timeResDfsFinal, 0.4, label='DFS', color='green')
 
     # Plot the graph
     plt.xticks(X_axis, X)
@@ -73,7 +96,6 @@ def node(treeType):
 
 
 if __name__ == "__main__":
-
     # Create random nodes for search
     nodeListB = [[node('b')], [node('b'), node('b')], [node('b'), node('b'), node('b')],
                  [node('b'), node('b'), node('b'), node('b')],
@@ -101,20 +123,24 @@ if __name__ == "__main__":
     timeDFSUnb = []
 
     # Balanced tree
-    loop(nodeListB, timeBFSBal, timeDFSBal)
+    loop(nodeListB, timeBFSBal, timeDFSBal, 'both')
     # Unbalanced tree
-    loop(nodeListUnb, timeBFSUnb, timeDFSUnb)
+    loop(nodeListUnb, timeBFSUnb, timeDFSUnb, 'both')
 
     # Draw table
     myTable = PrettyTable(['Nr of Nodes searched', *X])
-    myTable.add_row(["Balanced BFS", *timeBFSBal])
-    myTable.add_row(["Balanced DFS", *timeDFSBal])
-    myTable.add_row(["Unbalanced BFS", *timeBFSUnb])
-    myTable.add_row(["Unbalanced DFS", *timeDFSUnb])
+    myTable.add_row(["Balanced BFS", *timeBFSBal]) if timeBFSBal else None
+    myTable.add_row(["Balanced DFS", *timeDFSBal]) if timeDFSBal else None
+    myTable.add_row(["Unbalanced BFS", *timeBFSUnb]) if timeBFSUnb else None
+    myTable.add_row(["Unbalanced DFS", *timeDFSUnb]) if timeDFSUnb else None
     print(myTable)
 
     # Separate time results
     print(myTable[0])
     print(myTable[1])
-    print(myTable[2])
-    print(myTable[3])
+    try:
+        if myTable[2]:
+            print(myTable[2])
+            print(myTable[3])
+    except IndexError:
+        print("No more results")
