@@ -143,4 +143,4 @@ if __name__ == "__main__":
             print(myTable[2])
             print(myTable[3])
     except IndexError:
-        print("No more results")
+        print(" ")
