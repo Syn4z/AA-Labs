@@ -3,6 +3,7 @@ import random
 import heapq
 
 
+# Generate a random weighted graph with num_nodes nodes and num_edges edges
 def generateGraph(num_nodes, num_edges):
     G = nx.Graph()
     G.add_nodes_from(range(num_nodes))
@@ -17,6 +18,7 @@ def generateGraph(num_nodes, num_edges):
     return G
 
 
+# Dijkstra's algorithm for weighted graph
 def dijkstra(G, start, target):
     visited = set()
     distance = {start: 0}
