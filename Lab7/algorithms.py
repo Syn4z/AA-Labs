@@ -1,11 +1,10 @@
 import heapq
-import random
 import sys
 
 
 # Function to implement Prim's algorithm on a graph
-def prim(matrix):
-    vertices = len(matrix)
+def prim(graph):
+    vertices = len(graph)
 
     key = [sys.maxsize] * vertices
     parent = [None] * vertices
@@ -23,14 +22,14 @@ def prim(matrix):
         mst_set[u] = True
 
         for v in range(vertices):
-            if 0 < matrix[u][v] < key[v] and not mst_set[v]:
-                key[v] = matrix[u][v]
+            if 0 < graph[u][v] < key[v] and not mst_set[v]:
+                key[v] = graph[u][v]
                 parent[v] = u
                 heapq.heappush(heap, (key[v], v))
 
     result = []
     for i in range(1, vertices):
-        result.append([parent[i], i, matrix[i][parent[i]]])
+        result.append([parent[i], i, graph[i][parent[i]]])
 
     return result
 
@@ -58,6 +57,7 @@ class DisjointSet:
         return True
 
 
+# Function to implement Kruskal's algorithm on a graph
 def kruskal(graph):
     n = graph[-1][1] + 1
     dsu = DisjointSet(n)

@@ -1,20 +1,19 @@
 import time
-import numpy as np
 from matplotlib import pyplot as plt
 from prettytable import PrettyTable
-from graph import generate_matrix
+from graph import generateGraph
 from algorithms import prim, kruskal
 
 if __name__ == "__main__":
 
     n = [10, 50, 100, 150, 200, 250]
-    density = 0.5
+    density = 1  # 0.3
     kruskalTime = []
     primTime = []
 
     for nr in n:
         graph = []
-        matrix = generate_matrix(nr, density)
+        matrix = generateGraph(nr, density)
         for i in range(len(matrix)):
             for j in range(i, len(matrix)):
                 if matrix[i][j] != 0:
@@ -29,6 +28,7 @@ if __name__ == "__main__":
         endTime = time.perf_counter()
         kruskalTime.append(endTime - startTime)
 
+    # Plot the graph
     plt.plot(n, primTime, linewidth=3, label='Prim')
     plt.plot(n, kruskalTime, linewidth=3, label='Kruskal')
     plt.xlabel('Nodes')
