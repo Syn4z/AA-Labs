@@ -2,9 +2,7 @@ from decimal import *
 
 
 def bbpPi(n):
-    """
-    Returns the nth decimal digit of Pi using the BBP formula.
-    """
+    # Returns the nth decimal digit of Pi using the BBP formula.
     if n < 0:
         raise ValueError("Invalid value of n.")
 
@@ -17,9 +15,7 @@ def bbpPi(n):
 
 
 def legendrePi(n):
-    """
-    Returns the nth decimal digit of Pi using the Gauss-Legendre algorithm.
-    """
+    # Returns the nth decimal digit of Pi using the Gauss-Legendre algorithm.
     if n < 0:
         raise ValueError("Invalid value of n.")
 
@@ -43,9 +39,7 @@ def legendrePi(n):
 
 
 def spigotPi(n):
-    """
-    Returns the nth decimal digit of Pi using the spigot algorithm.
-    """
+    # Returns the nth decimal digit of Pi using the spigot algorithm.
     if n < 0:
         raise ValueError("Invalid value of n.")
 

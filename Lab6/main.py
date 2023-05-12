@@ -73,6 +73,17 @@ if __name__ == "__main__":
 
     myTable = PrettyTable(["Algorithm/Nth digit", *n])
     myTable.add_row(["BBP", *bbpTime])
+    print(myTable)
+    myTable = PrettyTable(["Algorithm/Nth digit", *n])
+    myTable.add_row(["Legendre", *legendreTime])
+    print(myTable)
+    myTable = PrettyTable(["Algorithm/Nth digit", *n])
+    myTable.add_row(["Spigot", *spigotTime])
+    print(myTable)
+
+    # Print table
+    myTable = PrettyTable(["Algorithm/Nth digit", *n])
+    myTable.add_row(["BBP", *bbpTime])
     myTable.add_row(["Legendre", *legendreTime])
     myTable.add_row(["Spigot", *spigotTime])
     print(myTable)
