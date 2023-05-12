@@ -40,7 +40,7 @@ if __name__ == "__main__":
         endTime = time.perf_counter()
         spigotTime.append(endTime - startTime)
 
-    # Plot graph
+    # Plot graphs
     bar(bbpTime)
     plt.xticks(x, xAxis)
     plt.xlabel('Nth digit')
@@ -71,6 +71,7 @@ if __name__ == "__main__":
     plt.legend()
     plt.show()
 
+    # Print separate tables
     myTable = PrettyTable(["Algorithm/Nth digit", *n])
     myTable.add_row(["BBP", *bbpTime])
     print(myTable)
@@ -81,7 +82,7 @@ if __name__ == "__main__":
     myTable.add_row(["Spigot", *spigotTime])
     print(myTable)
 
-    # Print table
+    # Print the entire table
     myTable = PrettyTable(["Algorithm/Nth digit", *n])
     myTable.add_row(["BBP", *bbpTime])
     myTable.add_row(["Legendre", *legendreTime])
