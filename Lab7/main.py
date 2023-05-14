@@ -7,7 +7,7 @@ from algorithms import prim, kruskal
 if __name__ == "__main__":
 
     n = [10, 50, 100, 150, 200, 250]
-    density = 1  # 0.3
+    density = 1  # 0.3 for sparse graphs, 1 for dense graphs
     kruskalTime = []
     primTime = []
 
@@ -33,9 +33,17 @@ if __name__ == "__main__":
     plt.plot(n, kruskalTime, linewidth=3, label='Kruskal')
     plt.xlabel('Nodes')
     plt.ylabel('Search Time, s')
-    plt.title('Algorithms comparison')
+    plt.title('Algorithms comparison for sparse graphs')
     plt.legend()
     plt.show()
+
+    myTable = PrettyTable(["Algorithm/Nth digit", *n])
+    myTable.add_row(["Prim", *primTime])
+    print(myTable)
+
+    myTable = PrettyTable(["Algorithm/Nth digit", *n])
+    myTable.add_row(["Kruskal", *kruskalTime])
+    print(myTable)
 
     # Print the entire table
     myTable = PrettyTable(["Algorithm/Nth digit", *n])
